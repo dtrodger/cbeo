@@ -4,10 +4,8 @@ Core app models
 from django.db import models
 from rest_framework import serializers
 
-from apps.core.managers import (
-    ActiveManager,
-    ArchivedManager
-)
+from apps.core.managers import ActiveManager, ArchivedManager
+
 
 class BaseModel(models.Model):
     """

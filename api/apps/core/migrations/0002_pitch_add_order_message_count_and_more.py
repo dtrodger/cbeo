@@ -4,65 +4,64 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('core', '0001_initial'),
+        ("core", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='pitch',
-            name='add_order_message_count',
+            model_name="pitch",
+            name="add_order_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='auction_summary_message_count',
+            model_name="pitch",
+            name="auction_summary_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='auction_update_message_count',
+            model_name="pitch",
+            name="auction_update_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='cancel_order_message_count',
+            model_name="pitch",
+            name="cancel_order_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='execute_order_message_count',
+            model_name="pitch",
+            name="execute_order_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='modify_order_message_count',
+            model_name="pitch",
+            name="modify_order_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='retail_price_improvement_message_count',
+            model_name="pitch",
+            name="retail_price_improvement_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='symbol_clear_message_count',
+            model_name="pitch",
+            name="symbol_clear_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='trade_break_message_count',
+            model_name="pitch",
+            name="trade_break_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='trade_message_count',
+            model_name="pitch",
+            name="trade_message_count",
             field=models.IntegerField(default=0),
         ),
         migrations.AddField(
-            model_name='pitch',
-            name='trading_status_message_count',
+            model_name="pitch",
+            name="trading_status_message_count",
             field=models.IntegerField(default=0),
         ),
     ]

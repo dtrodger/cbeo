@@ -60,7 +60,9 @@ class PitchUpload(APIView):
         if not pitch_file:
             return Response({"missing_file": True}, status=status.HTTP_400_BAD_REQUEST)
         if not pitch_file_name:
-            return Response({"missing_file_name": True}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"missing_file_name": True}, status=status.HTTP_400_BAD_REQUEST
+            )
 
         message_type_counts = {
             "symbol_clear_message_count": 0,
@@ -78,7 +80,7 @@ class PitchUpload(APIView):
         invalid_messages = []
         for line in pitch_file:
             try:
-                line_data = line.decode('utf-8').strip()
+                line_data = line.decode("utf-8").strip()
                 message_type = line_data[9:10]
                 if message_type == "s":
                     message_type_counts["symbol_clear_message_count"] += 1
@@ -106,29 +108,35 @@ class PitchUpload(APIView):
                 invalid_messages.append(line_data)
 
         if invalid_messages:
-            return Response({"invalid_message": invalid_messages}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"invalid_message": invalid_messages},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
         else:
             pitch = Pitch.objects.create(
-                **message_type_counts,
-                file=pitch_file,
-                file_name=pitch_file_name
+                **message_type_counts, file=pitch_file, file_name=pitch_file_name
             )
-            return Response(pitch.serialize(serializer_fields=[
-                "id",
-                "file_name",
-                "created",
-                "symbol_clear_message_count",
-                "add_order_message_count",
-                "modify_order_message_count",
-                "execute_order_message_count",
-                "trade_message_count",
-                "trade_break_message_count",
-                "cancel_order_message_count",
-                "trading_status_message_count",
-                "auction_update_message_count",
-                "auction_summary_message_count",
-                "retail_price_improvement_message_count"
-            ]), status=status.HTTP_200_OK)
+            return Response(
+                pitch.serialize(
+                    serializer_fields=[
+                        "id",
+                        "file_name",
+                        "created",
+                        "symbol_clear_message_count",
+                        "add_order_message_count",
+                        "modify_order_message_count",
+                        "execute_order_message_count",
+                        "trade_message_count",
+                        "trade_break_message_count",
+                        "cancel_order_message_count",
+                        "trading_status_message_count",
+                        "auction_update_message_count",
+                        "auction_summary_message_count",
+                        "retail_price_improvement_message_count",
+                    ]
+                ),
+                status=status.HTTP_200_OK,
+            )
 
 
 class PitchModelView(ModelViewSet):

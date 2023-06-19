@@ -26,7 +26,7 @@ def configure_sentry(environment, version):
             traces_sample_rate=TRACE_RATE,
             send_default_pii=True,
             environment=environment,
-            release=version
+            release=version,
         )
     else:
         log.info(f"Sentry not configured for environment {environment}")

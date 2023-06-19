@@ -13,7 +13,7 @@ ENVIRONMENT_FOLDER_PATH = pathlib.Path() / "env"
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
     if len(sys.argv) > 2 and sys.argv[1] == "-e":
         envs = ["local", "qa", "stagging", "prod", "docker_local"]
         env = sys.argv[2]
@@ -39,5 +39,5 @@ def main():
     execute_from_command_line(sys.argv)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
