@@ -1,0 +1,59 @@
+version: "3"
+
+services:
+  api:
+    container_name: cbeo-api-1
+    build:
+      dockerfile: Dockerfile.api
+    ports:
+      - 8001:8001
+    networks:
+      - cbeo
+    restart: always
+    depends_on:
+      - redis
+      - postgres
+  client:
+    container_name: cbeo-client-1
+    build:
+      dockerfile: Dockerfile.client
+    tty: true
+    ports:
+      - 3000:3000
+    networks:
+      - cbeo
+    restart: always
+    depends_on:
+      - api
+  postgres:
+    container_name: cbeo-postgres-1
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: cbeo
+    ports:
+      - 5432:5432
+    networks:
+      - cbeo
+    volumes:
+      - cbeo-postgres:/var/lib/postgresql/data
+    restart: always
+  redis:
+    container_name: cbeo-redis-1
+    image: redis
+    ports:
+      - 6379:6379
+    networks:
+      - cbeo
+    volumes:
+      - cbeo-redis:/data
+    restart: always
+
+networks:
+  cbeo:
+    driver: bridge
+
+volumes:
+  cbeo-redis:
+  cbeo-postgres:

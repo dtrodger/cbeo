@@ -1,0 +1,24 @@
+FROM centos:centos8
+USER root
+RUN cd /etc/yum.repos.d/
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
+RUN yum install -y \
+    yum-utils \
+    gcc \
+    python38 \
+    python38-pip \
+    python38-devel \
+    libffi-devel \
+    libpq-devel && \
+    yum clean -y all && \
+    ln -s /usr/bin/python3 /usr/bin/python
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+WORKDIR /usr/src/app
+RUN ls
+COPY ./api/requirements.txt .
+RUN python -m pip install --upgrade pip && \
+    pip install -r requirements.txt
+COPY ./api/ .
+CMD ["python", "manage.py", "-e", "docker_local", "docker_runserver"]
